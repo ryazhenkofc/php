@@ -1,20 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title }}</title>
-</head>
-<body>
-    <div class="card">
-        <h1>{{ $title }}</h1>
-        <p class="message">{{ $message }}</p>
+@extends('layouts.app')
 
-        <ul>
-            @foreach ($items as $item)
-                <li>{{ $item }}</li>
-            @endforeach
-        </ul>
-    </div>
-</body>
-</html>
+@section('title', $title)
+
+@section('content')
+
+    <h2>{{ $title }}</h2>
+    <p>{{ $message }}</p>
+
+    @if ($featured)
+        <p><strong>Featured</strong></p>
+    @else
+        <p>Regular page</p>
+    @endif
+
+    <h3>Items</h3>
+    <ul>
+        @foreach ($skills as $name => $description)
+            <li><strong>{{ $name }}:</strong> {{ $description }}</li>
+        @endforeach
+    </ul>
+
+    <h3>Notifications</h3>
+    @forelse ($notifications as $note)
+        <p>{{ $note }}</p>
+    @empty
+        <p>No notifications.</p>
+    @endforelse
+
+    @isset($message)
+        <h3>Extra</h3>
+        <em>"{{ $message }}"</em>
+    @endisset
+
+@endsection
