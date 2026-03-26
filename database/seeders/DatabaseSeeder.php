@@ -3,9 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use App\Models\Article;
 use App\Models\Author;
 use App\Models\Book;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +19,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $demoUser = User::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Demo User',
+                'password' => Hash::make('password'),
+                'role' => User::ROLE_USER,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        User::where('email', 'moderator@example.com')->delete();
+
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Demo Admin',
+                'password' => Hash::make('password'),
+                'role' => User::ROLE_ADMIN,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        if ($demoUser->articles()->count() === 0) {
+            Article::create([
+                'user_id' => $demoUser->id,
+                'title' => 'Welcome to the article system',
+                'body' => 'This sample article belongs to user@example.com. Log in as the admin (admin@example.com) to manage all articles.',
+            ]);
+        }
+
         $author1 = Author::create([
             'name' => 'George Orwell',
             'email' => 'george@example.com',
