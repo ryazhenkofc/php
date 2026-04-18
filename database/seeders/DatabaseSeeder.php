@@ -50,30 +50,33 @@ class DatabaseSeeder extends Seeder
         }
 
         $author1 = Author::create([
-            'name' => 'George Orwell',
-            'email' => 'george@example.com',
+            'name' => 'George',
+            'surname' => 'Orwell',
+            'birthdate' => '1903-06-25',
         ]);
         $author1->books()->createMany([
-            ['title' => '1984', 'description' => 'A dystopian novel set in a totalitarian society.'],
-            ['title' => 'Animal Farm', 'description' => 'A satirical allegory about power and corruption.'],
+            ['title' => 'Nineteen Eighty-Four', 'short_title' => '1984', 'year' => 1949],
+            ['title' => 'Animal Farm', 'short_title' => 'Animal Farm', 'year' => 1945],
         ]);
 
         $author2 = Author::create([
-            'name' => 'Jane Austen',
-            'email' => 'jane@example.com',
+            'name' => 'Jane',
+            'surname' => 'Austen',
+            'birthdate' => '1775-12-16',
         ]);
         $author2->books()->createMany([
-            ['title' => 'Pride and Prejudice', 'description' => 'A romantic novel about manners and marriage.'],
-            ['title' => 'Sense and Sensibility', 'description' => 'A story of two sisters and their romantic lives.'],
+            ['title' => 'Pride and Prejudice', 'short_title' => 'P&P', 'year' => 1813],
+            ['title' => 'Sense and Sensibility', 'short_title' => 'S&S', 'year' => 1811],
         ]);
 
         $author3 = Author::create([
-            'name' => 'Mark Twain',
-            'email' => 'mark@example.com',
+            'name' => 'Mark',
+            'surname' => 'Twain',
+            'birthdate' => '1835-11-30',
         ]);
         $author3->books()->createMany([
-            ['title' => 'The Adventures of Tom Sawyer', 'description' => 'A novel about a boy growing up along the Mississippi River.'],
-            ['title' => 'Adventures of Huckleberry Finn', 'description' => 'A story of a boy and a runaway slave traveling down the Mississippi.'],
+            ['title' => 'The Adventures of Tom Sawyer', 'short_title' => 'Tom Sawyer', 'year' => 1876],
+            ['title' => 'Adventures of Huckleberry Finn', 'short_title' => 'Huck Finn', 'year' => 1884],
         ]);
     }
 }

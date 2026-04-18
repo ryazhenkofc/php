@@ -16,12 +16,10 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->unsignedBigInteger('author_id');
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
-
-            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->string('short_title');
+            $table->unsignedInteger('year');
+            $table->foreignId('author_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
